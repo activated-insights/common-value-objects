@@ -21,7 +21,7 @@ class PhoneNumber implements ContactMethodInterface
      *
      * @throws InvalidArgumentException If the phone number is not a valid North American phone number.
      */
-    public function __construct(string $phoneNumber)
+    public function __construct($phoneNumber)
     {
         $normalizedPhoneNumber = self::parseNorthAmericanPhoneNumber($phoneNumber);
         if ($normalizedPhoneNumber === null) {
