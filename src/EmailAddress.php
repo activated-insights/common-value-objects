@@ -4,7 +4,7 @@ namespace Pinnacle\CommonValueObjects;
 
 use InvalidArgumentException;
 
-class EmailAddress
+class EmailAddress implements ContactMethodInterface
 {
     const TECHNICAL_ROLE_ALIASES = [
         'abuse',

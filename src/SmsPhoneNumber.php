@@ -5,7 +5,7 @@ namespace Pinnacle\CommonValueObjects;
 use InvalidArgumentException;
 use UnexpectedValueException;
 
-class SmsPhoneNumber
+class SmsPhoneNumber implements ContactMethodInterface
 {
     /**
      * @var PhoneNumber|null If this is a standard NANPA number, this will contain the phone number.
@@ -63,6 +63,11 @@ class SmsPhoneNumber
     public function __toString(): string
     {
         return $this->format();
+    }
+
+    public function value(): string
+    {
+        return $this->normalized();
     }
 
     /**
