@@ -7,7 +7,7 @@ use InvalidArgumentException;
 /**
  * Value object for a North American phone number.
  */
-class PhoneNumber
+class PhoneNumber implements ContactMethodInterface
 {
     /**
      * @var string The phone number in format 1XXXYYYZZZZ xNNNNNN.
@@ -47,6 +47,11 @@ class PhoneNumber
     public function __toString()
     {
         return $this->format();
+    }
+
+    public function value(): string
+    {
+        return $this->normalized();
     }
 
     /**
