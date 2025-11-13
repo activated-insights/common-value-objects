@@ -6,9 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Pinnacle\CommonValueObjects\FilledString;
 use UnexpectedValueException;
 
-/**
- * Class OffensiveWordSearcherTest
- */
 class FilledStringTest extends TestCase
 {
     /**
