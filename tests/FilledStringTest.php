@@ -35,4 +35,14 @@ class FilledStringTest extends TestCase
         $this->assertSame('abc', $string->getValue());
         $this->assertSame('abc', (string)$string);
     }
+
+    /**
+     * @test
+     */
+    public function hasStringWithContentAndSpaces_DoesNotThrowException()
+    {
+        $string = new FilledString('abc');
+        $this->assertSame('  abc  ', $string->getValue());
+        $this->assertSame('  abc  ', (string)$string);
+    }
 }
