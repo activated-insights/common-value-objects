@@ -2,9 +2,9 @@
 
 namespace Pinnacle\CommonValueObjects\Tests;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Pinnacle\CommonValueObjects\FilledString;
-use UnexpectedValueException;
 
 class FilledStringTest extends TestCase
 {
@@ -13,7 +13,7 @@ class FilledStringTest extends TestCase
      */
     public function hasEmptyString_ThrowsException()
     {
-        $this->expectException(UnexpectedValueException::class);
+        $this->expectException(InvalidArgumentException::class);
         new FilledString('');
     }
 
@@ -22,7 +22,7 @@ class FilledStringTest extends TestCase
      */
     public function hasStringWithSpaces_ThrowsException()
     {
-        $this->expectException(UnexpectedValueException::class);
+        $this->expectException(InvalidArgumentException::class);
         new FilledString('          ');
     }
 
@@ -41,7 +41,7 @@ class FilledStringTest extends TestCase
      */
     public function hasStringWithContentAndSpaces_DoesNotThrowException()
     {
-        $string = new FilledString('abc');
+        $string = new FilledString('  abc  ');
         $this->assertSame('  abc  ', $string->getValue());
         $this->assertSame('  abc  ', (string)$string);
     }

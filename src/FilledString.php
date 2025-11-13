@@ -2,7 +2,7 @@
 
 namespace Pinnacle\CommonValueObjects;
 
-use UnexpectedValueException;
+use InvalidArgumentException;
 
 class FilledString
 {
@@ -11,7 +11,7 @@ class FilledString
     public function __construct(string $value)
     {
         if (trim($value) === '') {
-            throw new UnexpectedValueException(sprintf('%s was provided an empty string in the constructor.', self::class));
+            throw new InvalidArgumentException(sprintf('%s was provided an empty string in the constructor.', self::class));
         }
 
         $this->value = $value;
