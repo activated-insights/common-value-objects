@@ -6,7 +6,10 @@ use InvalidArgumentException;
 
 class FilledString
 {
-    private $value;
+    /**
+     * @var string
+     */
+    protected $value;
 
     public function __construct(string $value)
     {
