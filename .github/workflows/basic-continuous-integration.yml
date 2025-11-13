@@ -1,0 +1,42 @@
+name: Basic Continuous Integration
+
+on:
+  pull_request:
+  push:
+    branches:
+      - release
+
+jobs:
+  phpunit-unit:
+    name: PHPUnit Unit Tests
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        php: ['7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          ini-values: assert.exception=1, zend.assertions=1
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --no-progress
+
+      - name: Execute unit tests
+        run: vendor/bin/phpunit --coverage-clover=coverage.xml
+
+      - name: Monitor coverage
+        if: github.event_name == 'pull_request'
+        uses: slavcodev/coverage-monitor-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          coverage_path: coverage.xml
+          threshold_alert: 0
+          threshold_warning: 95
+          comment_context: PHP ${{ matrix.php }} Coverage Report
